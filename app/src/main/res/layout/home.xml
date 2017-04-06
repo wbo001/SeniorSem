@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.takeahike.takeahike.MainActivity"
+    android:background="@drawable/background"
+    android:layout_weight="5"
+    android:clickable="false">
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView2"
-        tools:text="Home Page" />
+
+        <TextView
+            android:text="Shenandoah Valley Hiking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:clickable="false"
+            android:capitalize="words"
+            android:layout_alignWithParentIfMissing="false"
+            android:textColorLink="@android:color/holo_blue_dark"
+            android:textSize="36sp"
+            android:textAlignment="center"
+            android:fontFamily="casual"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:text="Start Hiking!"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView4"
+            android:layout_height="60dp"
+            tools:background="#008000"
+            tools:textColor="@android:color/black"
+            tools:textColorLink="@android:color/black"
+            android:textSize="36sp"
+            tools:textStyle="bold"
+            android:elevation="0dp"
+            android:clickable="true"
+            android:textAlignment="center"
+            android:textAllCaps="true" />
+
 </RelativeLayout>
