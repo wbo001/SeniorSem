@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "310943341107",
+    "firebase_url": "https://takeahike2-7d904.firebaseio.com",
+    "project_id": "takeahike2-7d904",
+    "storage_bucket": "takeahike2-7d904.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310943341107:android:a117394f894096d2",
+        "android_client_info": {
+          "package_name": "com.takeahike.takeahike"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310943341107-60emaa9f3n5omkdqsq62eumv3phbhhrm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfTVoyd6Y19qoR2W6G9XswuN6zfYlpDjU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
