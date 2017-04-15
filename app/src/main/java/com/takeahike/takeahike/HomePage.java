@@ -17,8 +17,6 @@ import android.widget.ViewFlipper;
 
 public class HomePage extends Fragment {
 
-    Animation Fade_in, Fade_out;
-    ViewFlipper viewFlipper;
 
     @Nullable
     @Override

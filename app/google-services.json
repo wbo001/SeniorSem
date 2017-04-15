@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "310943341107",
-    "firebase_url": "https://takeahike2-7d904.firebaseio.com",
-    "project_id": "takeahike2-7d904",
-    "storage_bucket": "takeahike2-7d904.appspot.com"
+    "project_number": "940675136531",
+    "firebase_url": "https://takeahike2-d3113.firebaseio.com",
+    "project_id": "takeahike2-d3113",
+    "storage_bucket": "takeahike2-d3113.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:310943341107:android:a117394f894096d2",
+        "mobilesdk_app_id": "1:940675136531:android:a117394f894096d2",
         "android_client_info": {
           "package_name": "com.takeahike.takeahike"
         }
       },
       "oauth_client": [
         {
-          "client_id": "310943341107-60emaa9f3n5omkdqsq62eumv3phbhhrm.apps.googleusercontent.com",
+          "client_id": "940675136531-d67t1intbv6as7udfnl8ii744sanmp56.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.takeahike.takeahike",
+            "certificate_hash": "872957be7b64dee9cea5a936020f106b37818429"
+          }
+        },
+        {
+          "client_id": "940675136531-he6p63cpk7h4qt8ad03kulftespegf26.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAfTVoyd6Y19qoR2W6G9XswuN6zfYlpDjU"
+          "current_key": "AIzaSyChYA915YmKm54DwwrAsjuRSJI5HF-j7Vw"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940675136531-he6p63cpk7h4qt8ad03kulftespegf26.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
