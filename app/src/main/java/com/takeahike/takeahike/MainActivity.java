@@ -37,12 +37,6 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private DatabaseReference mDataRef;
-    public ListView trailListView;
-
-    public List<TrailInfo> trails;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,39 +55,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        trails = new ArrayList<>();
-        mDataRef = FirebaseDatabase.getInstance().getReference("Trails");
-        trailListView = (ListView)findViewById(R.id.TrailPageList);
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mDataRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.print(dataSnapshot.getChildren());
-                trails.clear();
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                        TrailInfo ti = ds.getValue(TrailInfo.class);
-
-
-                        trails.add(ti);
-                }
-
-                TrailList adapt = new TrailList(MainActivity.this, trails);
-                trailListView.setAdapter(adapt);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
     }
 
     @Override

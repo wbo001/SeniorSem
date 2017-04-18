@@ -2,11 +2,12 @@ package com.takeahike.takeahike;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -14,19 +15,18 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 /**
- * Created by wesle on 4/15/2017.
+ * Created by wesle on 4/17/2017.
  */
 
-public class TrailList extends ArrayAdapter<TrailInfo> {
+public class TrailList extends ArrayAdapter<Trail> {
 
     private Activity context;
-    private List<TrailInfo> trails;
+    private List<Trail> trails;
 
-    public TrailList(Activity context, List<TrailInfo> trails){
+    public TrailList(Activity context, List<Trail> trails){
         super(context, R.layout.cust_trail_layout, trails);
         this.context = context;
         this.trails = trails;
-
     }
 
     @NonNull
@@ -34,19 +34,18 @@ public class TrailList extends ArrayAdapter<TrailInfo> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
 
-        View listViewItem = inflater.inflate(R.layout.cust_trail_layout, null, true);
+        View ListViewItem = inflater.inflate(R.layout.cust_trail_layout, null, true);
 
-        TextView trailName = (TextView)listViewItem.findViewById(R.id.TrailNameView);
-        TextView trailDiff = (TextView)listViewItem.findViewById(R.id.TrailDiffView);
-        TextView trailDe = (TextView)listViewItem.findViewById(R.id.TrailDeView);
+        TextView textName = (TextView) ListViewItem.findViewById(R.id.TrailNameView);
+        TextView textDiff = (TextView) ListViewItem.findViewById(R.id.TrailDiffView);
+        TextView textDe = (TextView) ListViewItem.findViewById(R.id.TrailDeView);
 
-        TrailInfo trail = trails.get(position);
+        Trail t = trails.get(position);
 
-        trailName.setText(TrailInfo.getName());
-        trailDiff.setText((TrailInfo.getDifficulty()));
-        trailDe.setText(TrailInfo.getDescription());
+        textName.setText(t.getName());
+        textDiff.setText("Difficulty: " + t.getDifficulty());
+        textDe.setText("Description: " + t.getDescription());
 
-        return listViewItem;
-
+        return ListViewItem;
     }
 }
