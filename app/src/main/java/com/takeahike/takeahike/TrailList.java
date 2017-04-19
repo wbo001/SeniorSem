@@ -39,6 +39,7 @@ public class TrailList extends ArrayAdapter<Trail> {
         TextView textName = (TextView) ListViewItem.findViewById(R.id.TrailNameView);
         TextView textDiff = (TextView) ListViewItem.findViewById(R.id.TrailDiffView);
         TextView textDe = (TextView) ListViewItem.findViewById(R.id.TrailDeView);
+        TextView milage = (TextView) ListViewItem.findViewById(R.id.TrailMilage);
 
         Trail t = trails.get(position);
 
