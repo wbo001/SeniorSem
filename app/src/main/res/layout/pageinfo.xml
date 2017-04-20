@@ -13,7 +13,22 @@
         android:layout_height="125dp"
         android:background="@drawable/bkgd2" />
 
-    <ExpandableListView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/difficultyDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Hi hows it going." >
+            </TextView>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
