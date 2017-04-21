@@ -26,7 +26,7 @@
                 android:id="@+id/difficultyDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Hi hows it going." >
+                android:text="@string/infoDesc" >
             </TextView>
         </LinearLayout>
     </ScrollView>
