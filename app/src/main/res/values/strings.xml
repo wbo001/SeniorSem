@@ -22,5 +22,12 @@
     <string name="easiestDesc">Numerical Rating: less than 50\n
                     A hike that is generally suitable for anyone who enjoys walking. Mostly level or with a slight incline. Generally less than 3 miles.</string>
     <string name="moderateTitle">Moderate</string>
-
+    <string name="moderateDesc">Numerical Rating: 50-100\n
+                    A moderate hike is generally suitable for novice hikers who want a bit of a challenge. The terrain will involve a moderate incline and may have some steeper sections. Generally 3 to 5 miles.</string>
+    <string name="moderateStrenTitle">Moderately Strenuous</string>
+    <string name="moderateStrenDesc">Numerical Rating: 100–150\n
+                    Moderately Strenuous hikes will generally be challenging for an unconditioned person. The terrain will involve a steady and often steep incline. Generally 5 to 8 miles.</string>
+    <string name="strenuousTitle">Strenuous</string>
+    <string name="strenuousDesc">Numerical Rating: 150-200\n
+                    Strenuous hikes will challenge most hikers. The hike will generally be longer and steeper, but may be deemed "Strenuous" because of the elevation gain. Generally 7 to 10 miles.</string>
 </resources>

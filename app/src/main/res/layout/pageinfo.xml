@@ -8,8 +8,8 @@
     android:weightSum="1">
 
     <TextView
-        android:layout_width="match_parent"
         android:id="@+id/textView6"
+        android:layout_width="match_parent"
         android:layout_height="125dp"
         android:background="@drawable/bkgd2" />
 
@@ -72,10 +72,46 @@
                 android:id="@+id/moderateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
                 android:textStyle="bold"
                 android:textSize="18sp"
                 android:text="@string/moderateTitle"></TextView>
+
+            <TextView
+                android:id="@+id/moderateDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:text="@string/moderateDesc"></TextView>
+
+            <TextView
+                android:id="@+id/moderateStrenTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/moderateStrenTitle"></TextView>
+
+            <TextView
+                android:id="@+id/moderateStrenDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:text="@string/moderateStrenDesc"></TextView>
+
+            <TextView
+                android:id="@+id/strenuousTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/strenuousTitle"></TextView>
+
+            <TextView
+                android:id="@+id/strenuousDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:text="@string/strenuousDesc"></TextView>
         </LinearLayout>
     </ScrollView>
 
