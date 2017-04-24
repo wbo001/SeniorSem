@@ -14,5 +14,13 @@
                     2,200 x 2=4,400\n
                     4,400 x 10 = 44,000\n
                     Square root of 44,000=209.8</string>
+    <string name="descCont">The hike\'s numerical rating is then tied to one of five descriptors: Easiest, Moderate, Moderately Strenuous, Strenuous, Very Strenuous.
+                    \nThe example hike (above) would be rated Very Strenuous.
+                    \nThere are a few exceptions to the formula\'s validity, such as Dark Hollow Falls. Although its numeric rating of 36.3 puts it in the \"Easiest\" range,
+                    its steepness over such a short distance warrants a \"Moderate.\"</string>
+    <string name="easiestTitle">Easiest</string>
+    <string name="easiestDesc">Numerical Rating: less than 50\n
+                    A hike that is generally suitable for anyone who enjoys walking. Mostly level or with a slight incline. Generally less than 3 miles.</string>
+    <string name="moderateTitle">Moderate</string>
 
 </resources>

@@ -20,16 +20,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="5dp">
 
             <TextView
                 android:id="@+id/difficultyTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textStyle="bold"
                 android:paddingBottom="5dp"
                 android:text="@string/difficultyTitle"
-                android:textSize="26sp"></TextView>
+                android:textSize="26sp"
+                android:textStyle="bold"></TextView>
 
             <TextView
                 android:id="@+id/difficultyDesc"
@@ -42,8 +43,39 @@
                 android:id="@+id/difficultyExample"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/hikeExample" >
-            </TextView>
+                android:paddingBottom="10dp"
+                android:text="@string/hikeExample"></TextView>
+
+            <TextView
+                android:id="@+id/difficultyExampleCont"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:text="@string/descCont"></TextView>
+
+            <TextView
+                android:id="@+id/easiestTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/easiestTitle"
+                android:textSize="18sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/easiestDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:text="@string/easiestDesc"></TextView>
+
+            <TextView
+                android:id="@+id/moderateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/moderateTitle"></TextView>
         </LinearLayout>
     </ScrollView>
 
