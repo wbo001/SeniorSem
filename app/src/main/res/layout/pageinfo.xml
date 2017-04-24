@@ -23,10 +23,26 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/difficultyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:paddingBottom="5dp"
+                android:text="@string/difficultyTitle"
+                android:textSize="26sp"></TextView>
+
+            <TextView
                 android:id="@+id/difficultyDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="@string/infoDesc" >
+                android:paddingBottom="10dp"
+                android:text="@string/infoDesc"></TextView>
+
+            <TextView
+                android:id="@+id/difficultyExample"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/hikeExample" >
             </TextView>
         </LinearLayout>
     </ScrollView>
