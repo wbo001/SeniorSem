@@ -112,6 +112,36 @@
                 android:layout_height="match_parent"
                 android:paddingBottom="10dp"
                 android:text="@string/strenuousDesc"></TextView>
+
+            <TextView
+                android:id="@+id/veryStrenuousTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/veryStrenuousTitle"></TextView>
+
+            <TextView
+                android:id="@+id/veryStrenuousDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:text="@string/veryStrenuousDesc"></TextView>
+
+            <TextView
+                android:id="@+id/avgPaceTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="@string/avgPaceTitle"></TextView>
+
+            <TextView
+                android:id="@+id/avgPaceDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="10dp"
+                android:text="@string/avgPaceDesc"></TextView>
         </LinearLayout>
     </ScrollView>
 
