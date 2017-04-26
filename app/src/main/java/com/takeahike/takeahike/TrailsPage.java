@@ -70,6 +70,7 @@ public class TrailsPage extends Fragment{
         final Set<String> tName = new HashSet<String>();
         final Set<String> tDescript = new HashSet<String>();
         final Set<String> tDiff = new HashSet<String>();
+        final Set<String> tMile = new HashSet<>();
 
         database = FirebaseDatabase.getInstance();
         trailRef = database.getReference("Trails");
@@ -90,6 +91,7 @@ public class TrailsPage extends Fragment{
                     tName.add(t.getName());
                     tDescript.add(t.getDescription());
                     tDiff.add(t.getDifficulty());
+                    tMile.add(t.getDistance());
                 }
 
                 TrailList adapter = new TrailList(getActivity(), trails);
@@ -97,6 +99,7 @@ public class TrailsPage extends Fragment{
                 editor.putStringSet("Name", tName);
                 editor.putStringSet("Description", tDescript);
                 editor.putStringSet("Difficulty", tDiff);
+                editor.putStringSet("Mileage", tMile);
                 editor.commit();
 
 
