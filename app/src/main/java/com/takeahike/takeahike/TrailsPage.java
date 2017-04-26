@@ -91,7 +91,8 @@ public class TrailsPage extends Fragment{
                     tName.add(t.getName());
                     tDescript.add(t.getDescription());
                     tDiff.add(t.getDifficulty());
-                    tMile.add(t.getDistance());
+                    String dist = Long.toString(t.getDistance());
+                    tMile.add(dist);
                 }
 
                 TrailList adapter = new TrailList(getActivity(), trails);
