@@ -10,24 +10,34 @@
     <string name="infoDesc">Maps have suggested ability descriptors. Shenandoah\'s Hiking Difficulty is determined by a numerical rating using the following formula:</string>
     <string name="difficultyTitle">Hiking Difficulty</string>
     <string name="hikeExample">Elevation Gain x 2 x distance (in miles). The product\'s square root is the numerical rating.
-                    For example, a 10-mile hike that gains 2,200 feet in elevation:\n
-                    2,200 x 2=4,400\n
-                    4,400 x 10 = 44,000\n
-                    Square root of 44,000=209.8</string>
+                    For example, a 10-mile hike that gains 2,200 feet in elevation:
+                    \n2,200 x 2=4,400
+                    \n4,400 x 10 = 44,000
+                    \nSquare root of 44,000=209.8</string>
     <string name="descCont">The hike\'s numerical rating is then tied to one of five descriptors: Easiest, Moderate, Moderately Strenuous, Strenuous, Very Strenuous.
                     \nThe example hike (above) would be rated Very Strenuous.
                     \nThere are a few exceptions to the formula\'s validity, such as Dark Hollow Falls. Although its numeric rating of 36.3 puts it in the \"Easiest\" range,
                     its steepness over such a short distance warrants a \"Moderate.\"</string>
     <string name="easiestTitle">Easiest</string>
-    <string name="easiestDesc">Numerical Rating: less than 50\n
-                    A hike that is generally suitable for anyone who enjoys walking. Mostly level or with a slight incline. Generally less than 3 miles.</string>
+    <string name="easiestDesc">Numerical Rating: less than 50
+                    \nA hike that is generally suitable for anyone who enjoys walking. Mostly level or with a slight incline. Generally less than 3 miles.</string>
     <string name="moderateTitle">Moderate</string>
-    <string name="moderateDesc">Numerical Rating: 50-100\n
-                    A moderate hike is generally suitable for novice hikers who want a bit of a challenge. The terrain will involve a moderate incline and may have some steeper sections. Generally 3 to 5 miles.</string>
+    <string name="moderateDesc">Numerical Rating: 50-100
+                    \nA moderate hike is generally suitable for novice hikers who want a bit of a challenge. The terrain will involve a moderate incline and may have some steeper sections. Generally 3 to 5 miles.</string>
     <string name="moderateStrenTitle">Moderately Strenuous</string>
-    <string name="moderateStrenDesc">Numerical Rating: 100–150\n
-                    Moderately Strenuous hikes will generally be challenging for an unconditioned person. The terrain will involve a steady and often steep incline. Generally 5 to 8 miles.</string>
+    <string name="moderateStrenDesc">Numerical Rating: 100–150
+                    \nModerately Strenuous hikes will generally be challenging for an unconditioned person. The terrain will involve a steady and often steep incline. Generally 5 to 8 miles.</string>
     <string name="strenuousTitle">Strenuous</string>
-    <string name="strenuousDesc">Numerical Rating: 150-200\n
-                    Strenuous hikes will challenge most hikers. The hike will generally be longer and steeper, but may be deemed "Strenuous" because of the elevation gain. Generally 7 to 10 miles.</string>
+    <string name="strenuousDesc">Numerical Rating: 150-200
+                    \nStrenuous hikes will challenge most hikers. The hike will generally be longer and steeper, but may be deemed "Strenuous" because of the elevation gain. Generally 7 to 10 miles.</string>
+    <string name="veryStrenuousTitle">Very Strenuous</string>
+    <string name="veryStrenuousDesc">Numerical Rating : greater than 200
+                    \nOnly well-conditioned and well-prepared hikers should attempt very strenuous hikes.
+                    The hike will generally be long and steep, and may include rock scrambling, stream crossings, and other challenging terrain. Generally 8 miles and over.</string>
+    <string name="avgPaceTitle">Average Pace is:</string>
+    <string name="avgPaceDesc">1.5 miles per hour for easiest trails.
+                    \n1.4 mph for moderate trails.
+                    \n1.3 mph for moderately strenuous trails.
+                    \n1.2 mph for strenuous and very strenuous trails.
+                    \nThis is hiking time and does not take into consideration fitness, exploration, rest, contemplation, etc.</string>
 </resources>
