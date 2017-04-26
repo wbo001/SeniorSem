@@ -34,7 +34,7 @@ public class Trail {
         Distance = distance;
     }
 
-    public void SetName(String name) {
+    public void setName(String name) {
         this.Name = name;
     }
 
