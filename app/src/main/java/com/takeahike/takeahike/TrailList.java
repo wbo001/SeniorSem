@@ -44,6 +44,7 @@ public class TrailList extends ArrayAdapter<Trail> {
         Trail t = trails.get(position);
 
         textName.setText(t.getName());
+        //milage.se("Mileage: " + t.getDistance());
         textDiff.setText("Difficulty: " + t.getDifficulty());
         textDe.setText("Description: " + t.getDescription());
 

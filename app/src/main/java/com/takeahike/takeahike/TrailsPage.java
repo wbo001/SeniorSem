@@ -1,5 +1,8 @@
 package com.takeahike.takeahike;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by wesle on 3/19/2017.
@@ -34,6 +39,7 @@ public class TrailsPage extends Fragment{
     ListView trailList;
     List<Trail> trails;
     View v;
+
 
     @Nullable
     @Override
@@ -60,6 +66,11 @@ public class TrailsPage extends Fragment{
     public void onStart() {
         super.onStart();
 
+        final SharedPreferences.Editor editor = getContext().getSharedPreferences("trailsInfo", Context.MODE_PRIVATE).edit();
+        final Set<String> tName = new HashSet<String>();
+        final Set<String> tDescript = new HashSet<String>();
+        final Set<String> tDiff = new HashSet<String>();
+
         database = FirebaseDatabase.getInstance();
         trailRef = database.getReference("Trails");
 
@@ -74,10 +85,19 @@ public class TrailsPage extends Fragment{
                     Trail t = ds.getValue(Trail.class);
 
                     trails.add(t);
+
+
+                    tName.add(t.getName());
+                    tDescript.add(t.getDescription());
+                    tDiff.add(t.getDifficulty());
                 }
 
                 TrailList adapter = new TrailList(getActivity(), trails);
                 trailList.setAdapter(adapter);
+                editor.putStringSet("Name", tName);
+                editor.putStringSet("Description", tDescript);
+                editor.putStringSet("Difficulty", tDiff);
+                editor.commit();
 
 
 

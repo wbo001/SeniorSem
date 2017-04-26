@@ -7,7 +7,7 @@ package com.takeahike.takeahike;
 
 public class Trail {
 
-    private String Milage;
+    private long Distance;
     private String Name;
     private String Description;
     private String Difficulty;
@@ -18,19 +18,19 @@ public class Trail {
 
 
 
-    public Trail(String name, String description, String difficulty, String milage) {
+    public Trail(String name, String description, String difficulty, long milage) {
         this.Name = name;
         this.Description = description;
         this.Difficulty = difficulty;
-        this.Milage = milage;
+        this.Distance = milage;
     }
 
-    public String getMilage() {
-        return Milage;
+    public long getDistance() {
+        return Distance;
     }
 
-    public void setMilage(String milage) {
-        Milage = milage;
+    public void setDistance(long distance) {
+        Distance = distance;
     }
 
     public void SetName(String name) {
