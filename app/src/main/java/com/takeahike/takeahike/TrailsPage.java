@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ import java.util.Set;
 
 public class TrailsPage extends Fragment{
 
-
+    private static final String TAG = "**MILEAGE**";
     FirebaseDatabase database;
     DatabaseReference trailRef;
     ListView trailList;
@@ -93,6 +94,7 @@ public class TrailsPage extends Fragment{
                     tDiff.add(t.getDifficulty());
                     String dist = Long.toString(t.getDistance());
                     tMile.add(dist);
+                    Log.d(TAG, dist);
                 }
 
                 TrailList adapter = new TrailList(getActivity(), trails);

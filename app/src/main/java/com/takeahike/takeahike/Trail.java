@@ -30,7 +30,7 @@ public class Trail {
         return Distance;
     }
 
-    public void setDistance(long distance) {
+    public void setMileage(long distance) {
         Distance = distance;
     }
 
