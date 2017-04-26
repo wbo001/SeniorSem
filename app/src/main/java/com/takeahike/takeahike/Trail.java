@@ -30,13 +30,8 @@ public class Trail {
         return Mileage;
     }
 
-<<<<<<< HEAD
-    public void setMileage(double Mileage) {
-        Mileage = Mileage;
-=======
-    public void setMileage(long distance) {
-        Distance = distance;
->>>>>>> 02595325ad4b871f3d061914322bdc130bc8e42f
+    public void setMileage(String mileage){
+        this.Mileage = mileage;
     }
 
     public void setName(String name) {
