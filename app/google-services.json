@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "940675136531-891bnv3quvi45g6r9angla000s1bqaem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.takeahike.takeahike",
+            "certificate_hash": "3891dcebad484d6e9f2bf6ea660fb26e8c2e2c67"
+          }
+        },
+        {
           "client_id": "940675136531-d67t1intbv6as7udfnl8ii744sanmp56.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
