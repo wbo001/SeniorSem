@@ -91,8 +91,7 @@ public class TrailsPage extends Fragment{
                     tName.add(t.getName());
                     tDescript.add(t.getDescription());
                     tDiff.add(t.getDifficulty());
-                    String dist = Long.toString(t.getDistance());
-                    tMile.add(dist);
+                    tMile.add(t.getMileage());
                 }
 
                 TrailList adapter = new TrailList(getActivity(), trails);
@@ -100,7 +99,7 @@ public class TrailsPage extends Fragment{
                 editor.putStringSet("Name", tName);
                 editor.putStringSet("Description", tDescript);
                 editor.putStringSet("Difficulty", tDiff);
-                editor.putStringSet("Mileage", tMile);
+                //editor.putStringSet("Mileage", tMile);
                 editor.commit();
 
 

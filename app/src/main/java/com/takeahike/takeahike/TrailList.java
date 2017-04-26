@@ -45,7 +45,7 @@ public class TrailList extends ArrayAdapter<Trail> {
 
         textName.setText(t.getName());
         textDiff.setText("Difficulty: " + t.getDifficulty());
-        milage.setText("Mileage: " + Long.toString(t.getDistance()));
+        milage.setText("Mileage: " + t.getMileage());
         textDe.setText("Description: " + t.getDescription());
 
         return ListViewItem;
