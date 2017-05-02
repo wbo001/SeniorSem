@@ -67,11 +67,11 @@ public class TrailsPage extends Fragment{
     public void onStart() {
         super.onStart();
 
-        final SharedPreferences.Editor editor = getContext().getSharedPreferences("trailsInfo", Context.MODE_PRIVATE).edit();
+        /*final SharedPreferences.Editor editor = getContext().getSharedPreferences("trailsInfo", Context.MODE_PRIVATE).edit();
         final Set<String> tName = new HashSet<String>();
         final Set<String> tDescript = new HashSet<String>();
         final Set<String> tDiff = new HashSet<String>();
-        final Set<String> tMile = new HashSet<>();
+        final Set<String> tMile = new HashSet<>();*/
 
         database = FirebaseDatabase.getInstance();
         trailRef = database.getReference("Trails");
@@ -89,19 +89,19 @@ public class TrailsPage extends Fragment{
                     trails.add(t);
 
 
-                    tName.add(t.getName());
+                    /*tName.add(t.getName());
                     tDescript.add(t.getDescription());
                     tDiff.add(t.getDifficulty());
-                    tMile.add(t.getMileage());
+                    tMile.add(t.getMileage());*/
                 }
 
                 TrailList adapter = new TrailList(getActivity(), trails);
                 trailList.setAdapter(adapter);
-                editor.putStringSet("Name", tName);
+                /*editor.putStringSet("Name", tName);
                 editor.putStringSet("Description", tDescript);
                 editor.putStringSet("Difficulty", tDiff);
                 editor.putStringSet("Mileage", tMile);
-                editor.commit();
+                editor.commit();*/
 
 
 
