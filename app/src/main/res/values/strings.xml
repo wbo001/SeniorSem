@@ -40,4 +40,10 @@
                     \n1.3 mph for moderately strenuous trails.
                     \n1.2 mph for strenuous and very strenuous trails.
                     \nThis is hiking time and does not take into consideration fitness, exploration, rest, contemplation, etc.</string>
+    <string name="title_activity_started__hike">Started_Hike</string>
+
+    <string name="title_activity_hike__started">Hike_Started</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
