@@ -56,7 +56,7 @@ public class Hike_Started extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Code for sending message to server
-                /*
+
                 RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
                 url = createURL(url);
 
@@ -76,9 +76,13 @@ public class Hike_Started extends AppCompatActivity {
                     }
                 });
                 // Add the request to the RequestQueue.
-                queue.add(stringRequest);*/
+                queue.add(stringRequest);
+
+                endHike();
             }
         });
+    }
+    public void onBackPressed(){
 
     }
     public String createURL(String url){
@@ -87,6 +91,14 @@ public class Hike_Started extends AppCompatActivity {
 
 
         return url;
+    }
+    public void endHike(){
+
+        Intent endHike = new Intent(getApplicationContext(), MainActivity.class);
+        endHike.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(endHike);
+        finish();
+
     }
 
 }

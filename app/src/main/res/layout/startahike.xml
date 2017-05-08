@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:padding="3dp">
 
     <TextView
         android:id="@+id/textView3"
@@ -53,8 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:inputType="textPersonName" />
 
 
     <TextView
@@ -73,8 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.05"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Phone" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/StartAHikeButton"

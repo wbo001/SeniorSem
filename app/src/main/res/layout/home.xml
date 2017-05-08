@@ -26,21 +26,5 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:text="Start Hiking!"
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/textView4"
-            android:layout_height="60dp"
-            tools:background="#008000"
-            tools:textColor="@android:color/black"
-            tools:textColorLink="@android:color/black"
-            android:textSize="36sp"
-            tools:textStyle="bold"
-            android:elevation="0dp"
-            android:clickable="true"
-            android:textAlignment="center"
-            android:textAllCaps="true" />
 
 </RelativeLayout>

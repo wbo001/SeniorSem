@@ -11,11 +11,13 @@
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="125dp"
-        android:background="@drawable/bkgd2" />
+        android:background="@drawable/bkgd2"
+        android:padding="5dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"

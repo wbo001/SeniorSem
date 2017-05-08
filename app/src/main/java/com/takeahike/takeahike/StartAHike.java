@@ -49,6 +49,8 @@ public class StartAHike extends Fragment{
 
         phoneNumberEdit = (EditText) view.findViewById(R.id.phoneNumber);
         hikerNameEdit = (EditText) view.findViewById(R.id.hikerName);
+        phoneNumberEdit.setHint("Phone Number");
+        hikerNameEdit.setHint("Your Name");
 
         startHike = (Button) view.findViewById(R.id.StartAHikeButton);
 
@@ -102,45 +104,47 @@ public class StartAHike extends Fragment{
         startHike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+
                 String url = null;
-                name = hikerNameEdit.getText().toString();
-                phoneNumber = phoneNumberEdit.getText().toString();
+                name = hikerNameEdit.getText().toString().trim();
+                phoneNumber = phoneNumberEdit.getText().toString().trim();
 
-                //phoneNumberEdit = (EditText)v.findViewById(R.id.phoneNumber);
-                //phoneNumber = phoneNumberEdit.getText().toString();
+                if((name.length() == 0) && (phoneNumber.length() != 10)){
+                    Toast.makeText(getContext(), "Phone number must be 10 digits and Name is required", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    //Code for sending message to server
+                    RequestQueue queue = Volley.newRequestQueue(getContext());
+                    url = "https://api.smsapi.com/sms.do?username=bigwilly&password=56caf899950018b65c8b42daaaf95e75&from=TakeAHike&to=" + phoneNumber + "&message=" + name + "started hiking the " + trailSelected + ". Please contact help if not back in  " + timeSelected + " hours. Thank You.";
 
-                //Code for sending message to server
-                RequestQueue queue = Volley.newRequestQueue(getContext());
-                url = "https://api.smsapi.com/sms.do?username=bigwilly&password=56caf899950018b65c8b42daaaf95e75&from=TakeAHike&to=" + phoneNumber + "&message=" + name + "started hiking the "+ trailSelected + ". Please contact help if not back in  " + timeSelected + " hours. Thank You.";
+                    /*
+                    // Request a string response from the provided URL.
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    //mTextView.setText("Response is: "+ response);
+                                    Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
+                                    messageID = response;
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //mTextView.setText("That didn't work! :" + error);
+                        }
+                    });
+                    // Add the request to the RequestQueue.
+                    queue.add(stringRequest);*/
 
-                /*
-                // Request a string response from the provided URL.
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // Display the first 500 characters of the response string.
-                                //mTextView.setText("Response is: "+ response);
-                                Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
-                                messageID = response;
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        //mTextView.setText("That didn't work! :" + error);
-                    }
-                });
-                // Add the request to the RequestQueue.
-                queue.add(stringRequest);*/
-
-                //Starting the hike started activity
-                Intent hikeStarted = new Intent(getActivity(), Hike_Started.class);
-                hikeStarted.putExtra("TRAIL", trailSelected);
-                hikeStarted.putExtra("MESSAGEID", messageID);
-                hikeStarted.putExtra("PHONE", phoneNumber);
-                hikeStarted.putExtra("NAME", name);
-                startActivity(hikeStarted);
-
+                    //Starting the hike started activity
+                    Intent hikeStarted = new Intent(getActivity(), Hike_Started.class);
+                    hikeStarted.putExtra("TRAIL", trailSelected);
+                    hikeStarted.putExtra("MESSAGEID", messageID);
+                    hikeStarted.putExtra("PHONE", phoneNumber);
+                    hikeStarted.putExtra("NAME", name);
+                    startActivity(hikeStarted);
+                }
             }
         });
     }
