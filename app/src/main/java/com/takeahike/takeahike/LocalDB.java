@@ -1,6 +1,7 @@
 package com.takeahike.takeahike;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -61,6 +62,24 @@ public class LocalDB {
     {
         db = null;
         dBHelper.close();
+    }
+
+    public static int addTrail(Trail trail)
+    {
+        assert(db != null);
+
+        ContentValues values = new ContentValues(3);
+        values.put(Trails_T.NAME, trail.getName());
+        values.put(Trails_T.MILEAGE, trail.getMileage());
+        values.put(Trails_T.DESCRIPTION, trail.getDescription());
+        values.put(Trails_T.DIFFICULTY, trail.getDifficulty());
+
+        long results = db.insert(Trails_T.TABLE_NAME, null, values);
+
+        if (results == -1)
+            return FAILURE;
+        else
+            return SUCCESS;
     }
 
     public static ArrayList<Trail> getAllTrails(Context context) {

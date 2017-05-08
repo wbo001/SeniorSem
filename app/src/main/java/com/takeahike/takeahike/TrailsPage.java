@@ -2,6 +2,8 @@ package com.takeahike.takeahike;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -72,47 +74,66 @@ public class TrailsPage extends Fragment{
         final Set<String> tDescript = new HashSet<String>();
         final Set<String> tDiff = new HashSet<String>();
         final Set<String> tMile = new HashSet<>();*/
+        boolean connected = false;
 
-        database = FirebaseDatabase.getInstance();
-        trailRef = database.getReference("Trails");
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        trailRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        connected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if(connected == true) {
+            database = FirebaseDatabase.getInstance();
 
-                trails.clear();
+            trailRef = database.getReference("Trails");
 
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
+            trailRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    Trail t = ds.getValue(Trail.class);
+                    trails.clear();
 
-                    trails.add(t);
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                        Trail t = ds.getValue(Trail.class);
+
+                        trails.add(t);
+                        LocalDB.openDB(getActivity());
+                        LocalDB.addTrail(t);
+                        LocalDB.closeDB();
 
 
-                    /*tName.add(t.getName());
-                    tDescript.add(t.getDescription());
-                    tDiff.add(t.getDifficulty());
-                    tMile.add(t.getMileage());*/
+                        /*tName.add(t.getName());
+                        tDescript.add(t.getDescription());
+                        tDiff.add(t.getDifficulty());
+                        tMile.add(t.getMileage());*/
+                    }
+
+                    TrailList adapter = new TrailList(getActivity(), trails);
+                    trailList.setAdapter(adapter);
+                    /*editor.putStringSet("Name", tName);
+                    editor.putStringSet("Description", tDescript);
+                    editor.putStringSet("Difficulty", tDiff);
+                    editor.putStringSet("Mileage", tMile);
+                    editor.commit();*/
+
+
                 }
 
-                TrailList adapter = new TrailList(getActivity(), trails);
-                trailList.setAdapter(adapter);
-                /*editor.putStringSet("Name", tName);
-                editor.putStringSet("Description", tDescript);
-                editor.putStringSet("Difficulty", tDiff);
-                editor.putStringSet("Mileage", tMile);
-                editor.commit();*/
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
+                }
+            });
+        }
+        else
+        {
+            LocalDB.openDB(getContext());
+            trails = LocalDB.getAllTrails(getActivity());
+            LocalDB.closeDB();
 
+            TrailList adapter = new TrailList(getActivity(), trails);
+            trailList.setAdapter(adapter);
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        }
     }
 
     /*private void pullData(){
