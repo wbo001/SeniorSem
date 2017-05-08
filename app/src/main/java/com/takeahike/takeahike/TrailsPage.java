@@ -42,13 +42,12 @@ public class TrailsPage extends Fragment{
     ListView trailList;
     List<Trail> trails;
     View v;
-
+    boolean connected = false;
 
     @Nullable
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.v = view;
         getActivity().setTitle("Hiking Trails");
 
         trailList = (ListView) v.findViewById(R.id.trailPageListView);
@@ -61,11 +60,72 @@ public class TrailsPage extends Fragment{
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.trails, container, false);
+        v = inflater.inflate(R.layout.trails, container, false);
 
+        connected = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        connected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if(connected == true) {
+            database = FirebaseDatabase.getInstance();
+
+            trailRef = database.getReference("Trails");
+
+            trailRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    trails.clear();
+
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                        Trail t = ds.getValue(Trail.class);
+
+                        trails.add(t);
+                        LocalDB.openDB(getContext());
+                        LocalDB.addTrail(t);
+                        LocalDB.closeDB();
+
+
+                        /*tName.add(t.getName());
+                        tDescript.add(t.getDescription());
+                        tDiff.add(t.getDifficulty());
+                        tMile.add(t.getMileage());*/
+                    }
+
+                    TrailList adapter = new TrailList(getActivity(), trails);
+                    trailList.setAdapter(adapter);
+                    /*editor.putStringSet("Name", tName);
+                    editor.putStringSet("Description", tDescript);
+                    editor.putStringSet("Difficulty", tDiff);
+                    editor.putStringSet("Mileage", tMile);
+                    editor.commit();*/
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        else if(connected == false)
+        {
+            LocalDB.openDB(getContext());
+            trails = LocalDB.getAllTrails(getActivity());
+            LocalDB.closeDB();
+
+            TrailList adapter = new TrailList(getActivity(), trails);
+            trailList.setAdapter(adapter);
+
+        }
+        return v;
     }
 
-    @Override
+    /*@Override
     public void onStart() {
         super.onStart();
 
@@ -73,7 +133,7 @@ public class TrailsPage extends Fragment{
         final Set<String> tName = new HashSet<String>();
         final Set<String> tDescript = new HashSet<String>();
         final Set<String> tDiff = new HashSet<String>();
-        final Set<String> tMile = new HashSet<>();*/
+        final Set<String> tMile = new HashSet<>();
         boolean connected = false;
 
         ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -104,7 +164,7 @@ public class TrailsPage extends Fragment{
                         /*tName.add(t.getName());
                         tDescript.add(t.getDescription());
                         tDiff.add(t.getDifficulty());
-                        tMile.add(t.getMileage());*/
+                        tMile.add(t.getMileage());
                     }
 
                     TrailList adapter = new TrailList(getActivity(), trails);
@@ -113,7 +173,7 @@ public class TrailsPage extends Fragment{
                     editor.putStringSet("Description", tDescript);
                     editor.putStringSet("Difficulty", tDiff);
                     editor.putStringSet("Mileage", tMile);
-                    editor.commit();*/
+                    editor.commit();
 
 
                 }
@@ -134,7 +194,7 @@ public class TrailsPage extends Fragment{
             trailList.setAdapter(adapter);
 
         }
-    }
+    }*/
 
     /*private void pullData(){
 
