@@ -43,32 +43,34 @@ public class TrailsPage extends Fragment{
     List<Trail> trails;
     View v;
     boolean connected = false;
+    TrailList adapter;
 
     @Nullable
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    /*public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Hiking Trails");
 
-        trailList = (ListView) v.findViewById(R.id.trailPageListView);
 
-        trails = new ArrayList<>();
 
         //pullData();
 
 
-    }
+    }*/
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.trails, container, false);
+        getActivity().setTitle("Hiking Trails");
 
         connected = false;
+        trailList = (ListView) v.findViewById(R.id.trailPageListView);
 
+        trails = new ArrayList<>();
         ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         connected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-        if(connected == true) {
+
             database = FirebaseDatabase.getInstance();
 
             trailRef = database.getReference("Trails");
@@ -78,7 +80,7 @@ public class TrailsPage extends Fragment{
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     trails.clear();
-
+                    if(connected == true) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         Trail t = ds.getValue(Trail.class);
@@ -95,8 +97,21 @@ public class TrailsPage extends Fragment{
                         tMile.add(t.getMileage());*/
                     }
 
-                    TrailList adapter = new TrailList(getActivity(), trails);
-                    trailList.setAdapter(adapter);
+                        adapter = new TrailList(getActivity(), trails);
+                        trailList.setAdapter(adapter);
+                    }
+
+                    else if(connected == false)
+                    {
+                        LocalDB.openDB(getContext());
+                        trails = LocalDB.getAllTrails(getContext());
+                        LocalDB.closeDB();
+
+                        adapter = new TrailList(getActivity(), trails);
+                        trailList.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+
+                    }
                     /*editor.putStringSet("Name", tName);
                     editor.putStringSet("Description", tDescript);
                     editor.putStringSet("Difficulty", tDiff);
@@ -111,119 +126,16 @@ public class TrailsPage extends Fragment{
 
                 }
             });
-        }
-        else if(connected == false)
-        {
-            LocalDB.openDB(getContext());
-            trails = LocalDB.getAllTrails(getActivity());
-            LocalDB.closeDB();
 
-            TrailList adapter = new TrailList(getActivity(), trails);
-            trailList.setAdapter(adapter);
 
-        }
+
+
         return v;
     }
 
-    /*@Override
-    public void onStart() {
-        super.onStart();
-
-        /*final SharedPreferences.Editor editor = getContext().getSharedPreferences("trailsInfo", Context.MODE_PRIVATE).edit();
-        final Set<String> tName = new HashSet<String>();
-        final Set<String> tDescript = new HashSet<String>();
-        final Set<String> tDiff = new HashSet<String>();
-        final Set<String> tMile = new HashSet<>();
-        boolean connected = false;
-
-        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        connected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
-        if(connected == true) {
-            database = FirebaseDatabase.getInstance();
-
-            trailRef = database.getReference("Trails");
-
-            trailRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-                    trails.clear();
-
-                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-
-                        Trail t = ds.getValue(Trail.class);
-
-                        trails.add(t);
-                        LocalDB.openDB(getActivity());
-                        LocalDB.addTrail(t);
-                        LocalDB.closeDB();
-
-
-                        /*tName.add(t.getName());
-                        tDescript.add(t.getDescription());
-                        tDiff.add(t.getDifficulty());
-                        tMile.add(t.getMileage());
-                    }
-
-                    TrailList adapter = new TrailList(getActivity(), trails);
-                    trailList.setAdapter(adapter);
-                    /*editor.putStringSet("Name", tName);
-                    editor.putStringSet("Description", tDescript);
-                    editor.putStringSet("Difficulty", tDiff);
-                    editor.putStringSet("Mileage", tMile);
-                    editor.commit();
-
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }
-        else
-        {
-            LocalDB.openDB(getContext());
-            trails = LocalDB.getAllTrails(getActivity());
-            LocalDB.closeDB();
-
-            TrailList adapter = new TrailList(getActivity(), trails);
-            trailList.setAdapter(adapter);
-
-        }
-    }*/
-
-    /*private void pullData(){
-
-        database = FirebaseDatabase.getInstance();
-        trailRef = database.getReference("Trails");
-
-        trailRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-
-                    Trail t = ds.getValue(Trail.class);
-
-                    System.out.println("**************" + t.getName());
-                    System.out.println("**************" + t.getDescription());
-                    System.out.println("**************" + t.getDifficulty());
-                    trails.add(t);
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }*/
-
+    public void onResume()
+    {
+        super.onResume();
+        trailList.setAdapter(adapter);
+    }
 }
