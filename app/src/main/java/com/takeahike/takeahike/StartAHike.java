@@ -109,7 +109,8 @@ public class StartAHike extends Fragment{
                 name = hikerNameEdit.getText().toString().trim();
                 phoneNumber = phoneNumberEdit.getText().toString().trim();
 
-                if((name.length() == 0) && (phoneNumber.length() != 10)){
+                if((name.length() == 0) && (phoneNumber.length() != 10)) {
+
                     Toast.makeText(getContext(), "Phone number must be 10 digits and Name is required", Toast.LENGTH_LONG).show();
                 }
                 else {
