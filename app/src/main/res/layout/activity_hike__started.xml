@@ -9,16 +9,25 @@
     <include layout="@layout/content_hike__started"
         android:id="@+id/include" />
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/startedHikeTextview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="61dp"
-        android:text="TextView" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/stopHikeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="3.98"
+            android:text="End HIke" />
+
+        <Button
+            android:id="@+id/checkURLButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.49"
+            android:text="Check URL" />
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

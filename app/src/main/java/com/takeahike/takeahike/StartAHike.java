@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -34,15 +37,18 @@ public class StartAHike extends Fragment{
 
     Button startHike;
     TextView mTextView;
-    String messageID, timeSelected, trailSelected;
-    Spinner trailDropdown;
-    Spinner timeDropdown;
+    String messageID, name, trailSelected, phoneNumber, timeSelected;
+    Spinner trailDropdown, timeDropdown;
+    EditText phoneNumberEdit, hikerNameEdit;
 
 
     @Nullable
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        phoneNumberEdit = (EditText) view.findViewById(R.id.phoneNumber);
+        hikerNameEdit = (EditText) view.findViewById(R.id.hikerName);
 
         startHike = (Button) view.findViewById(R.id.StartAHikeButton);
 
@@ -51,8 +57,8 @@ public class StartAHike extends Fragment{
         ArrayAdapter<String> trailAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, trails);
         trailDropdown.setAdapter(trailAdapter);
 
-        timeDropdown = (Spinner)view.findViewById(R.id.timeSpinner);
-        String[] times = new String[]{"1", "2", "3","4", "5", "6"};
+        timeDropdown = (Spinner)view.findViewById(R.id.trailTime);
+        String[] times = new String[]{"1", "2", "3", "4", "5", "6"};
         ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, times);
         timeDropdown.setAdapter(timeAdapter);
 
@@ -79,13 +85,10 @@ public class StartAHike extends Fragment{
             }
         });
 
-
-        //Time dropdown listener
         timeDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 timeSelected = parent.getSelectedItem().toString();
-
             }
 
             @Override
@@ -100,47 +103,45 @@ public class StartAHike extends Fragment{
             @Override
             public void onClick(View v){
                 String url = null;
-                messageID = "HikeStarted";
+                name = hikerNameEdit.getText().toString();
+                phoneNumber = phoneNumberEdit.getText().toString();
+
+                //phoneNumberEdit = (EditText)v.findViewById(R.id.phoneNumber);
+                //phoneNumber = phoneNumberEdit.getText().toString();
 
                 //Code for sending message to server
+                RequestQueue queue = Volley.newRequestQueue(getContext());
+                url = "https://api.smsapi.com/sms.do?username=bigwilly&password=56caf899950018b65c8b42daaaf95e75&from=TakeAHike&to=" + phoneNumber + "&message=" + name + "started hiking the "+ trailSelected + ". Please contact help if not back in  " + timeSelected + " hours. Thank You.";
 
-                /*RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-                url = createURL(url);
-
+                /*
                 // Request a string response from the provided URL.
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 // Display the first 500 characters of the response string.
-                                mTextView.setText("Response is: "+ response);
+                                //mTextView.setText("Response is: "+ response);
+                                Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
                                 messageID = response;
                             }
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        mTextView.setText("That didn't work! :" + error);
+                        //mTextView.setText("That didn't work! :" + error);
                     }
                 });
                 // Add the request to the RequestQueue.
                 queue.add(stringRequest);*/
 
-
                 //Starting the hike started activity
                 Intent hikeStarted = new Intent(getActivity(), Hike_Started.class);
-                hikeStarted.putExtra("TIME", timeSelected);
                 hikeStarted.putExtra("TRAIL", trailSelected);
                 hikeStarted.putExtra("MESSAGEID", messageID);
-                hikeStarted.putExtra("PHONE", "15402724723");
+                hikeStarted.putExtra("PHONE", phoneNumber);
+                hikeStarted.putExtra("NAME", name);
                 startActivity(hikeStarted);
+
             }
         });
-    }
-
-    public String createURL(String url){
-
-        url = "https://api.smsapi.com/sms.do?username=bigwilly&password=56caf899950018b65c8b42daaaf95e75&to=15402724723&message=Trail:" + trailSelected + "TimeGone:" + timeSelected;
-
-        return url;
     }
 }

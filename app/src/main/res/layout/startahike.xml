@@ -22,30 +22,59 @@
         android:layout_weight="0.09" />
 
     <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:text="How long will you be gone?"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/trailTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.09" />
+
+    <TextView
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07"
-        android:text="How long should we wait to contact someone? (hours)"
+        android:text="What name do you go by?"
         android:textAlignment="center"
         android:textSize="22sp"
         android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/timeSpinner"
+    <EditText
+        android:id="@+id/hikerName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.04" />
+        android:layout_weight="0.05"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07"
-        android:text="Give us a number to call if you dont come back (10 digit)"
+        android:text="What number should we notify upon your return (10 digit)"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.05"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Phone" />
 
     <Button
         android:id="@+id/StartAHikeButton"
