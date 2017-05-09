@@ -1,6 +1,7 @@
 package com.takeahike.takeahike;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
@@ -37,10 +38,19 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    SharedPreferences appInPro;
+    SharedPreferences.Editor edit;
+    String appInProgress;
+    String messageID, phoneNumber, name, trailSelected, timeSelected;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        appInPro = this.getSharedPreferences(getString(R.string.shared_pref_key), this.MODE_PRIVATE);
+        appInProgress = appInPro.getString("Is_hike_in_pro", "False");
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomePage()).commit();
         }
@@ -55,6 +65,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        checkForHike();
     }
 
     @Override
@@ -122,5 +134,24 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void checkForHike(){
+
+        if(appInProgress.equalsIgnoreCase("True")){
+
+            messageID = appInPro.getString("MESSAGEID", "000000000");
+            phoneNumber = appInPro.getString("PHONE", "12345678901");
+            trailSelected = appInPro.getString("TRAIL", "Trail1");
+            timeSelected = appInPro.getString("TIME", "0");
+
+            Intent hikeStarted = new Intent(this, Hike_Started.class);
+            hikeStarted.putExtra("TRAIL", trailSelected);
+            hikeStarted.putExtra("MESSAGEID", messageID);
+            hikeStarted.putExtra("PHONE", phoneNumber);
+            hikeStarted.putExtra("TIME", timeSelected);
+            hikeStarted.putExtra("NAME", name);
+            startActivity(hikeStarted);
+        }
+
     }
 }

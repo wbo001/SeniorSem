@@ -1,6 +1,7 @@
 package com.takeahike.takeahike;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +29,8 @@ public class Hike_Started extends AppCompatActivity {
     String message, url, messageID, phoneNumber, name, trailSelected, time;
     Button stopHike;
     int time1;
+    SharedPreferences appInPro;
+    SharedPreferences.Editor edit;
     //Button checkURL;
 
     @Override
@@ -37,12 +40,16 @@ public class Hike_Started extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        appInPro = this.getSharedPreferences(getString(R.string.shared_pref_key), this.MODE_PRIVATE);
+
         this.setTitle("Hike Started");
 
         //checkURL = (Button) findViewById(R.id.checkURLButton);
         stopHike = (Button) findViewById(R.id.stopHikeButton);
 
         startedHikeTimer = (TextView) findViewById(R.id.textView4);
+
+        edit = appInPro.edit();
 
         Intent intent = getIntent();
 
@@ -51,8 +58,16 @@ public class Hike_Started extends AppCompatActivity {
         phoneNumber = intent.getStringExtra("PHONE");
         trailSelected = intent.getStringExtra("TRAIL");
         time = intent.getStringExtra("TIME");
+        edit.putString("TIME", time);
         time1 = Integer.valueOf(time);
 
+
+        edit.putString("Is_hike_in_pro", "True");
+        edit.putString("PHONE", phoneNumber);
+        edit.putString("TRAIL", trailSelected);
+        edit.putString("NAME", name);
+        edit.putString("MESSAGEID", messageID);
+        edit.apply();
 
         /*checkURL.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +137,8 @@ public class Hike_Started extends AppCompatActivity {
     }
     public void endHike(){
 
+        edit.clear();
+        edit.commit();
         Intent endHike = new Intent(getApplicationContext(), MainActivity.class);
         endHike.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(endHike);
