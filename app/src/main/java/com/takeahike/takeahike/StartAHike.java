@@ -40,6 +40,7 @@ public class StartAHike extends Fragment{
     String messageID, name, trailSelected, phoneNumber, timeSelected;
     Spinner trailDropdown, timeDropdown;
     EditText phoneNumberEdit, hikerNameEdit;
+    long timeHikeStarted;
 
 
     @Nullable
@@ -113,17 +114,15 @@ public class StartAHike extends Fragment{
 
                     //Code for sending message to server
                     RequestQueue queue = Volley.newRequestQueue(getContext());
-                    url = "https://api.smsapi.com/sms.do?username=bigwilly&password=56caf899950018b65c8b42daaaf95e75&from=TakeAHike&to=" + phoneNumber + "&message=" + name + "started hiking the " + trailSelected + ". Please contact help if not back in  " + timeSelected + " hours. Thank You.";
+                    url = "https://api.smsapi.com/sms.do?username=Sameiltonarch@gmail.com&password=dbd4776c15b1a457905aacdf98a82261&to=" + phoneNumber + "&message=" + name + ".";
 
-                    /*
+
                     // Request a string response from the provided URL.
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
                                     // Display the first 500 characters of the response string.
-                                    //mTextView.setText("Response is: "+ response);
-                                    Toast.makeText(getContext(), response, Toast.LENGTH_LONG).show();
                                     messageID = response;
                                 }
                             }, new Response.ErrorListener() {
@@ -133,10 +132,12 @@ public class StartAHike extends Fragment{
                         }
                     });
                     // Add the request to the RequestQueue.
-                    queue.add(stringRequest);*/
+                    queue.add(stringRequest);
 
                     //Starting the hike started activity
                     Intent hikeStarted = new Intent(getActivity(), Hike_Started.class);
+                    timeHikeStarted = System.currentTimeMillis();
+                    hikeStarted.putExtra("TIME_HIKE_STARTED", timeHikeStarted);
                     hikeStarted.putExtra("TRAIL", trailSelected);
                     hikeStarted.putExtra("MESSAGEID", messageID);
                     hikeStarted.putExtra("PHONE", phoneNumber);

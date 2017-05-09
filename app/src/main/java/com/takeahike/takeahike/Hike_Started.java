@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,9 +27,9 @@ import org.w3c.dom.Text;
 public class Hike_Started extends AppCompatActivity {
 
     TextView startedHikeTimer;
-    String message, url, messageID, phoneNumber, name, trailSelected, time;
-    Button stopHike;
-    int time1;
+    String message, url, messageID, phoneNumber, name, trailSelected, timeSelected;
+    Button stopHike, checkErr;
+    long timeHikeStarted, timeElapsed, timeRemaining;
     SharedPreferences appInPro;
     SharedPreferences.Editor edit;
     //Button checkURL;
@@ -46,6 +47,7 @@ public class Hike_Started extends AppCompatActivity {
 
         //checkURL = (Button) findViewById(R.id.checkURLButton);
         stopHike = (Button) findViewById(R.id.stopHikeButton);
+        checkErr = (Button) findViewById(R.id.Button2);
 
         startedHikeTimer = (TextView) findViewById(R.id.textView4);
 
@@ -55,13 +57,15 @@ public class Hike_Started extends AppCompatActivity {
 
         messageID = intent.getStringExtra("MESSAGEID");
         name = intent.getStringExtra("NAME");
-        phoneNumber = intent.getStringExtra("PHONE");
+        phoneNumber = intent.getStringExtra("PHONE").trim();
         trailSelected = intent.getStringExtra("TRAIL");
-        time = intent.getStringExtra("TIME");
-        edit.putString("TIME", time);
-        time1 = Integer.valueOf(time);
+        timeHikeStarted = intent.getLongExtra("TIME_HIKE_STARTED", timeHikeStarted);
+        timeElapsed = System.currentTimeMillis() - timeHikeStarted;
+        timeSelected = intent.getStringExtra("TIME");
+        timeRemaining = (Integer.valueOf(timeSelected) * 3600000) - timeElapsed;
 
-
+        edit.putString("TIME", timeSelected);
+        edit.putLong("TIME_HIKE_STARTED", timeHikeStarted);
         edit.putString("Is_hike_in_pro", "True");
         edit.putString("PHONE", phoneNumber);
         edit.putString("TRAIL", trailSelected);
@@ -69,15 +73,7 @@ public class Hike_Started extends AppCompatActivity {
         edit.putString("MESSAGEID", messageID);
         edit.apply();
 
-        /*checkURL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                url = createURL(url);
-                Toast.makeText(getApplication(), url, Toast.LENGTH_LONG).show();
-            }
-        });*/
-
-        new CountDownTimer(time1 * 3600000, 1000) {
+        new CountDownTimer(timeRemaining, 1000) {
 
             public void onTick(long millisUntilFinished) {
 
@@ -100,7 +96,7 @@ public class Hike_Started extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for sending message to server
 
-               /* RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
+               RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
                 url = createURL(url);
 
                 // Request a string response from the provided URL.
@@ -119,18 +115,18 @@ public class Hike_Started extends AppCompatActivity {
                     }
                 });
                 // Add the request to the RequestQueue.
-                queue.add(stringRequest);*/
+                queue.add(stringRequest);
 
                 endHike();
             }
         });
     }
     public void onBackPressed(){
-
+        Toast.makeText(getApplicationContext(), messageID, Toast.LENGTH_LONG).show();
     }
     public String createURL(String url){
 
-        url = "https://api.smsapi.com/sms.do?username=bigwilly&password=56caf899950018b65c8b42daaaf95e75&from=TakeAHike&to=" + phoneNumber + "&message=" + name + "has returned safely from" + trailSelected;
+        url = "https://api.smsapi.com/sms.do?username=Sameiltonarch@gmail.com&password=dbd4776c15b1a457905aacdf98a82261&to=" + phoneNumber + "&message=" + trailSelected +".";
 
 
         return url;

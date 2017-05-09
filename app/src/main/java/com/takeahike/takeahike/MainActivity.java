@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     SharedPreferences.Editor edit;
     String appInProgress;
     String messageID, phoneNumber, name, trailSelected, timeSelected;
+    long timeHikeStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,11 +144,13 @@ public class MainActivity extends AppCompatActivity
             phoneNumber = appInPro.getString("PHONE", "12345678901");
             trailSelected = appInPro.getString("TRAIL", "Trail1");
             timeSelected = appInPro.getString("TIME", "0");
+            timeHikeStarted = appInPro.getLong("TIME_HIKE_STARTED", 0);
 
             Intent hikeStarted = new Intent(this, Hike_Started.class);
             hikeStarted.putExtra("TRAIL", trailSelected);
             hikeStarted.putExtra("MESSAGEID", messageID);
             hikeStarted.putExtra("PHONE", phoneNumber);
+            hikeStarted.putExtra("TIME_HIKE_STARTED", timeHikeStarted);
             hikeStarted.putExtra("TIME", timeSelected);
             hikeStarted.putExtra("NAME", name);
             startActivity(hikeStarted);
