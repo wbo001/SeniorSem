@@ -28,7 +28,7 @@ public class Hike_Started extends AppCompatActivity {
 
     TextView startedHikeTimer;
     String message, url, messageID, phoneNumber, name, trailSelected, timeSelected;
-    Button stopHike, checkErr;
+    Button stopHike;
     long timeHikeStarted, timeElapsed, timeRemaining;
     SharedPreferences appInPro;
     SharedPreferences.Editor edit;
@@ -47,7 +47,6 @@ public class Hike_Started extends AppCompatActivity {
 
         //checkURL = (Button) findViewById(R.id.checkURLButton);
         stopHike = (Button) findViewById(R.id.stopHikeButton);
-        checkErr = (Button) findViewById(R.id.Button2);
 
         startedHikeTimer = (TextView) findViewById(R.id.textView4);
 

@@ -15,16 +15,6 @@
         android:textSize="36sp" />
 
     <Button
-        android:id="@+id/Button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight="3.98"
-        android:padding="10dp"
-        android:background="@color/colorPrimary"
-        android:text="End HIke" />
-
-    <Button
         android:id="@+id/stopHikeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
