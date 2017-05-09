@@ -28,7 +28,7 @@ public class LocalDB {
     // RETURN CODES FOR USER METHODS
     public static final int FAILURE = -1;
     public static final int SUCCESS = 0;
-    public static final int EMAIL_ALREADY_EXISTS = 1;
+    public static final int EMAIL_ALREADY_EXISTS = 2;
 
     static class DatabaseHelper extends SQLiteOpenHelper
     {
@@ -68,7 +68,7 @@ public class LocalDB {
     {
         assert(db != null);
 
-        ContentValues values = new ContentValues(3);
+        ContentValues values = new ContentValues(4);
         values.put(Trails_T.NAME, trail.getName());
         values.put(Trails_T.MILEAGE, trail.getMileage());
         values.put(Trails_T.DESCRIPTION, trail.getDescription());
