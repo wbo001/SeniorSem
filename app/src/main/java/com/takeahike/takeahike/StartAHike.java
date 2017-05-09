@@ -109,11 +109,8 @@ public class StartAHike extends Fragment{
                 name = hikerNameEdit.getText().toString().trim();
                 phoneNumber = phoneNumberEdit.getText().toString().trim();
 
-                if((name.length() == 0) && (phoneNumber.length() != 11)) {
+                if((name.length() != 0) && (phoneNumber.length() == 11)) {
 
-                    Toast.makeText(getContext(), "Phone number must be 10 digits and Name is required", Toast.LENGTH_LONG).show();
-                }
-                else {
                     //Code for sending message to server
                     RequestQueue queue = Volley.newRequestQueue(getContext());
                     url = "https://api.smsapi.com/sms.do?username=bigwilly&password=56caf899950018b65c8b42daaaf95e75&from=TakeAHike&to=" + phoneNumber + "&message=" + name + "started hiking the " + trailSelected + ". Please contact help if not back in  " + timeSelected + " hours. Thank You.";
@@ -145,6 +142,12 @@ public class StartAHike extends Fragment{
                     hikeStarted.putExtra("PHONE", phoneNumber);
                     hikeStarted.putExtra("NAME", name);
                     startActivity(hikeStarted);
+
+                }
+                else {
+
+                    Toast.makeText(getContext(), "Phone number must be 11 digits and Name is required", Toast.LENGTH_LONG).show();
+
                 }
             }
         });

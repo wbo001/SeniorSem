@@ -2,6 +2,7 @@ package com.takeahike.takeahike;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +23,10 @@ import org.w3c.dom.Text;
 
 public class Hike_Started extends AppCompatActivity {
 
-    TextView startedHikeTV;
+    TextView startedHikeTimer;
     String message, url, messageID, phoneNumber, name, trailSelected;
-    Button stopHike, checkURL;
+    Button stopHike;
+    //Button checkURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,10 @@ public class Hike_Started extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        checkURL = (Button) findViewById(R.id.checkURLButton);
+        //checkURL = (Button) findViewById(R.id.checkURLButton);
         stopHike = (Button) findViewById(R.id.stopHikeButton);
+
+        startedHikeTimer = (TextView) findViewById(R.id.textView4);
 
         Intent intent = getIntent();
 
@@ -44,13 +48,26 @@ public class Hike_Started extends AppCompatActivity {
         trailSelected = intent.getStringExtra("TRAIL");
 
 
-        checkURL.setOnClickListener(new View.OnClickListener() {
+        /*checkURL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 url = createURL(url);
                 Toast.makeText(getApplication(), url, Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
+
+        new CountDownTimer(30000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                startedHikeTimer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                //here you can have your logic to set text to edittext
+            }
+
+            public void onFinish() {
+                startedHikeTimer.setText("done!");
+            }
+
+        }.start();
 
         stopHike.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07"
-        android:text="What number should we notify upon your return (10 digit)"
+        android:text="What number should we notify upon your return (11 digit)"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold" />
