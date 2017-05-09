@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  * Created by wesle on 3/19/2017.
@@ -55,9 +56,15 @@ public class StartAHike extends Fragment{
 
         startHike = (Button) view.findViewById(R.id.StartAHikeButton);
 
+
+
+        LocalDB.openDB(getActivity());
+        ArrayList<Trail> trails = LocalDB.getAllTrails(getActivity());
+        LocalDB.closeDB();
+
+        ArrayAdapter<Trail> trailAdapter = new ArrayAdapter<Trail>(getActivity(), android.R.layout.simple_list_item_1, trails);
         trailDropdown = (Spinner)view.findViewById(R.id.trailSpinner);
-        String[] trails = new String[]{"Trail1", "Trail2", "Trail3"};
-        ArrayAdapter<String> trailAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, trails);
+
         trailDropdown.setAdapter(trailAdapter);
 
         timeDropdown = (Spinner)view.findViewById(R.id.trailTime);
