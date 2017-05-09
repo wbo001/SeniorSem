@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,8 +25,9 @@ import org.w3c.dom.Text;
 public class Hike_Started extends AppCompatActivity {
 
     TextView startedHikeTimer;
-    String message, url, messageID, phoneNumber, name, trailSelected;
+    String message, url, messageID, phoneNumber, name, trailSelected, time;
     Button stopHike;
+    int time1;
     //Button checkURL;
 
     @Override
@@ -34,6 +36,8 @@ public class Hike_Started extends AppCompatActivity {
         setContentView(R.layout.activity_hike__started);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        this.setTitle("Hike Started");
 
         //checkURL = (Button) findViewById(R.id.checkURLButton);
         stopHike = (Button) findViewById(R.id.stopHikeButton);
@@ -46,6 +50,8 @@ public class Hike_Started extends AppCompatActivity {
         name = intent.getStringExtra("NAME");
         phoneNumber = intent.getStringExtra("PHONE");
         trailSelected = intent.getStringExtra("TRAIL");
+        time = intent.getStringExtra("TIME");
+        time1 = Integer.valueOf(time);
 
 
         /*checkURL.setOnClickListener(new View.OnClickListener() {
@@ -56,15 +62,20 @@ public class Hike_Started extends AppCompatActivity {
             }
         });*/
 
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(time1 * 3600000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                startedHikeTimer.setText("seconds remaining: " + millisUntilFinished / 1000);
+
+                long hour = (millisUntilFinished / 3600000);
+                long minute = (millisUntilFinished / 60000) - (60 * hour);
+                long second = ((millisUntilFinished / 1000) - (3600 * hour)) - (60 * minute);
+
+                startedHikeTimer.setText(" " + hour + ":" + minute + ":" + second);
                 //here you can have your logic to set text to edittext
             }
 
             public void onFinish() {
-                startedHikeTimer.setText("done!");
+                startedHikeTimer.setText("End Hike!");
             }
 
         }.start();
@@ -74,7 +85,7 @@ public class Hike_Started extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for sending message to server
 
-                RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
+               /* RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
                 url = createURL(url);
 
                 // Request a string response from the provided URL.
@@ -93,7 +104,7 @@ public class Hike_Started extends AppCompatActivity {
                     }
                 });
                 // Add the request to the RequestQueue.
-                queue.add(stringRequest);
+                queue.add(stringRequest);*/
 
                 endHike();
             }

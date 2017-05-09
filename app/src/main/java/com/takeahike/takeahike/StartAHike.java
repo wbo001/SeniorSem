@@ -140,6 +140,7 @@ public class StartAHike extends Fragment{
                     hikeStarted.putExtra("TRAIL", trailSelected);
                     hikeStarted.putExtra("MESSAGEID", messageID);
                     hikeStarted.putExtra("PHONE", phoneNumber);
+                    hikeStarted.putExtra("TIME", timeSelected);
                     hikeStarted.putExtra("NAME", name);
                     startActivity(hikeStarted);
 
