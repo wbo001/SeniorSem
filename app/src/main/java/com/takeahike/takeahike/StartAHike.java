@@ -1,6 +1,9 @@
 package com.takeahike.takeahike;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -42,6 +45,7 @@ public class StartAHike extends Fragment{
     Spinner trailDropdown, timeDropdown;
     EditText phoneNumberEdit, hikerNameEdit;
     long timeHikeStarted;
+    boolean isConnected;
 
 
     @Nullable
@@ -55,8 +59,6 @@ public class StartAHike extends Fragment{
         hikerNameEdit.setHint("Your Name");
 
         startHike = (Button) view.findViewById(R.id.StartAHikeButton);
-
-
 
         LocalDB.openDB(getActivity());
         String[] trailNames = LocalDB.getAllTrailsName(getActivity());
@@ -117,41 +119,48 @@ public class StartAHike extends Fragment{
                 name = hikerNameEdit.getText().toString().trim();
                 phoneNumber = phoneNumberEdit.getText().toString().trim();
 
+                ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+
                 if((name.length() != 0) && (phoneNumber.length() == 11)) {
+                    if(isConnected) {
+                        //Code for sending message to server
+                        /*RequestQueue queue = Volley.newRequestQueue(getContext());
+                        url = "https://api.smsapi.com/sms.do?username=Sameiltonarch@gmail.com&password=dbd4776c15b1a457905aacdf98a82261&to=" + phoneNumber + "&message=" + name + ".";
 
-                    //Code for sending message to server
-                    RequestQueue queue = Volley.newRequestQueue(getContext());
-                    url = "https://api.smsapi.com/sms.do?username=Sameiltonarch@gmail.com&password=dbd4776c15b1a457905aacdf98a82261&to=" + phoneNumber + "&message=" + name + ".";
 
+                        // Request a string response from the provided URL.
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                                new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        // Display the first 500 characters of the response string.
+                                        messageID = response;
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                //mTextView.setText("That didn't work! :" + error);
+                            }
+                        });
+                        // Add the request to the RequestQueue.
+                        queue.add(stringRequest);*/
 
-                    // Request a string response from the provided URL.
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    // Display the first 500 characters of the response string.
-                                    messageID = response;
-                                }
-                            }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            //mTextView.setText("That didn't work! :" + error);
-                        }
-                    });
-                    // Add the request to the RequestQueue.
-                    queue.add(stringRequest);
-
-                    //Starting the hike started activity
-                    Intent hikeStarted = new Intent(getActivity(), Hike_Started.class);
-                    timeHikeStarted = System.currentTimeMillis();
-                    hikeStarted.putExtra("TIME_HIKE_STARTED", timeHikeStarted);
-                    hikeStarted.putExtra("TRAIL", trailSelected);
-                    hikeStarted.putExtra("MESSAGEID", messageID);
-                    hikeStarted.putExtra("PHONE", phoneNumber);
-                    hikeStarted.putExtra("TIME", timeSelected);
-                    hikeStarted.putExtra("NAME", name);
-                    startActivity(hikeStarted);
-
+                        //Starting the hike started activity
+                        Intent hikeStarted = new Intent(getActivity(), Hike_Started.class);
+                        timeHikeStarted = System.currentTimeMillis();
+                        hikeStarted.putExtra("TIME_HIKE_STARTED", timeHikeStarted);
+                        hikeStarted.putExtra("TRAIL", trailSelected);
+                        hikeStarted.putExtra("MESSAGEID", messageID);
+                        hikeStarted.putExtra("PHONE", phoneNumber);
+                        hikeStarted.putExtra("TIME", timeSelected);
+                        hikeStarted.putExtra("NAME", name);
+                        startActivity(hikeStarted);
+                    }
+                    else{
+                        Toast.makeText(getContext(), "No Connection", Toast.LENGTH_LONG).show();
+                    }
                 }
                 else {
 

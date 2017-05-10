@@ -1,6 +1,7 @@
 package com.takeahike.takeahike;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,7 +44,7 @@ public class TrailsPage extends Fragment{
     ListView trailList;
     List<Trail> trails;
     View v;
-    boolean connected = false;
+    boolean isConnected;
     TrailList adapter;
 
     @Nullable
@@ -62,15 +64,14 @@ public class TrailsPage extends Fragment{
         v = inflater.inflate(R.layout.trails, container, false);
         getActivity().setTitle("Hiking Trails");
 
-        connected = false;
         trailList = (ListView) v.findViewById(R.id.trailPageListView);
 
         trails = new ArrayList<>();
-        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
+        ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        connected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
 
+        if(isConnected) {
             database = FirebaseDatabase.getInstance();
 
             trailRef = database.getReference("Trails");
@@ -80,7 +81,6 @@ public class TrailsPage extends Fragment{
                 public void onDataChange(DataSnapshot dataSnapshot) {
 
                     trails.clear();
-                    if(connected == true) {
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         Trail t = ds.getValue(Trail.class);
@@ -90,44 +90,37 @@ public class TrailsPage extends Fragment{
                         LocalDB.addTrail(t);
                         LocalDB.closeDB();
 
-
-                        /*tName.add(t.getName());
-                        tDescript.add(t.getDescription());
-                        tDiff.add(t.getDifficulty());
-                        tMile.add(t.getMileage());*/
                     }
 
-                        adapter = new TrailList(getActivity(), trails);
-                        trailList.setAdapter(adapter);
-                    }
+                    adapter = new TrailList(getActivity(), trails);
+                    trailList.setAdapter(adapter);
+                }
 
-                    else if(connected == false)
-                    {
-                        LocalDB.openDB(getContext());
-                        trails = LocalDB.getAllTrails(getContext());
-                        LocalDB.closeDB();
 
-                        adapter = new TrailList(getActivity(), trails);
-                        trailList.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
-
-                    }
                     /*editor.putStringSet("Name", tName);
                     editor.putStringSet("Description", tDescript);
                     editor.putStringSet("Difficulty", tDiff);
                     editor.putStringSet("Mileage", tMile);
                     editor.commit();*/
 
-
-                }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
             });
+        }
+        if(!isConnected)
+        {
+            Toast.makeText(getContext(), "No connection", Toast.LENGTH_LONG).show();
+            LocalDB.openDB(getContext());
+            trails = LocalDB.getAllTrails(getContext());
+            LocalDB.closeDB();
 
+            adapter = new TrailList(getActivity(), trails);
+            trailList.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
 
+        }
 
 
         return v;
