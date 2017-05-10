@@ -116,4 +116,37 @@ public class LocalDB {
 
         return list;
     }
+
+    public static String[] getAllTrailsName(Context context) {
+        assert(db != null);
+        String query = Trails_T.GET_ALL_TRAILS;
+        String[] data = {};
+        Cursor c = db.rawQuery(query, null);
+
+        //Toast.makeText(context, c.toString(),Toast.LENGTH_SHORT).show();
+
+        if (c == null || c.getCount() == 0) {
+            return null;
+        }
+
+        //Toast.makeText(context, "out loop",Toast.LENGTH_SHORT).show();
+
+        c.moveToFirst();
+        Log.d(TAG, "cursor size:" + c.getCount());
+
+        int size = c.getCount();
+
+        String[] names = new String[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            //Toast.makeText(context, "Ran loop",Toast.LENGTH_SHORT).show();
+            String name = c.getString(c.getColumnIndex(Trails_T.NAME));
+
+            names[i] = name;
+            c.moveToNext();
+        }
+
+        return names;
+    }
 }

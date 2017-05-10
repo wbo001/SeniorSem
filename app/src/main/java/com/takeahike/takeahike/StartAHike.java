@@ -59,17 +59,17 @@ public class StartAHike extends Fragment{
 
 
         LocalDB.openDB(getActivity());
-        ArrayList<Trail> trails = LocalDB.getAllTrails(getActivity());
+        String[] trailNames = LocalDB.getAllTrailsName(getActivity());
         LocalDB.closeDB();
 
-        ArrayAdapter<Trail> trailAdapter = new ArrayAdapter<Trail>(getActivity(), android.R.layout.simple_list_item_1, trails);
+        ArrayAdapter<String> trailAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, trailNames);
         trailDropdown = (Spinner)view.findViewById(R.id.trailSpinner);
 
         trailDropdown.setAdapter(trailAdapter);
 
         timeDropdown = (Spinner)view.findViewById(R.id.trailTime);
-        String[] times = new String[]{"1", "2", "3", "4", "5", "6"};
-        ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, times);
+        String[] times = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        ArrayAdapter<String> timeAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, times);
         timeDropdown.setAdapter(timeAdapter);
 
         getActivity().setTitle("Start A Hike");

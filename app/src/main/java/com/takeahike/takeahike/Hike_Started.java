@@ -95,7 +95,7 @@ public class Hike_Started extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for sending message to server
 
-               RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
+                RequestQueue queue = Volley.newRequestQueue(getApplication().getApplicationContext());
                 url = createURL(url);
 
                 // Request a string response from the provided URL.
