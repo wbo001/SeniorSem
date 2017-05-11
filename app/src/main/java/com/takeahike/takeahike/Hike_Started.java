@@ -125,7 +125,7 @@ public class Hike_Started extends AppCompatActivity {
     }
     public String createURL(String url){
 
-        url = "https://api.smsapi.com/sms.do?username=Sameiltonarch@gmail.com&password=dbd4776c15b1a457905aacdf98a82261&to=" + phoneNumber + "&message=" + trailSelected +".";
+        url = "https://api.smsapi.com/sms.do?username=bigblackafrothunder@gmail.com&password=1871a3c1da602bf471d3d76cc60cdb9b&to=" + phoneNumber + "&message=" + trailSelected +".";
 
 
         return url;
