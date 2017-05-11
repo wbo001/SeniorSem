@@ -6,6 +6,8 @@
 
     <string name="action_settings">Settings</string>
 
+    <string name="websiteLink">Click the link to go to the National Park Service website for the Shenandoah Valley. <a href="https://www.nps.gov/shen/index.htm">https://www.nps.gov/shen/index.htm</a></string>
+
     <!-- Info Page -->
     <string name="infoDesc">Maps have suggested ability descriptors. Shenandoah\'s Hiking Difficulty is determined by a numerical rating using the following formula:</string>
     <string name="difficultyTitle">Hiking Difficulty</string>
